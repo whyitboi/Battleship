@@ -28,12 +28,13 @@ export class Gameboard {
     return this.missedShots;
   }
   receiveAttack(position) {
+    if (this.missedShots.has(this.key(position))) return undefined;
     if (this.shipPositions.has(this.key(position))) {
       const ship = this.getShipAt(position);
       ship.hit();
       return "hit";
     } else {
-      this.missedShots.add(position);
+      this.missedShots.add(this.key(position));
       return "miss";
     }
   }

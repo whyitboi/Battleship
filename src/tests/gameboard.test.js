@@ -36,4 +36,11 @@ describe("Gameboard tests", () => {
     expect(board.receiveAttack([2, 5])).toBe("miss");
     expect(board.getMissedShots()).toContainEqual([2, 5]);
   });
+  test("attacking the same square twice", () => {
+    const board = new Gameboard();
+    const ship = new Ship(3);
+    board.placeShip(ship, [2, 3], "vertical");
+    board.receiveAttack([2, 4]);
+    expect(board.receiveAttack([2, 4])).toBe(undefined);
+  });
 });
