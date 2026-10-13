@@ -1,0 +1,53 @@
+/*fonts*/
+
+@font-face {
+  font-family: "gondolaSDRegular";
+  src:
+    url("./fonts/gondola_sd-webfont.woff2") format("woff2"),
+    url("./fonts/gondola_sd-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "floraRegular";
+  src:
+    url("./fonts/florlrg_-webfont.woff2") format("woff2"),
+    url("./fonts/florlrg_-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  --_fontFamily: var(--fontFamily, inherit);
+  --_fontColor: var(--fontColor, inherit);
+  --_padding: var(--padding, inherit);
+  --_fontSize: var(--fontSize, inherit);
+  --_backgroundColor: var(--backgroundColor, inherit);
+  --_padding: var(--padding, inherit);
+  --_border: var(--border, inherit);
+  --_borderRadius: var(--borderRadius, inherit);
+}
+
+/*variables*/
+:root {
+  --_fontFamily: var(--fontFamily, "gondolaSDRegular");
+  --_fontSize: var(--fontSize, clamp(1em, 0.5em, +1.5vw, 2rem), 24px);
+  --_fontColor: var(--fontColor, black);
+  --_padding: var(--padding, 1em);
+  --_backgroundColor: var(--backgroundColor, white);
+  --_border: var(--border, 1px solid #d6d9d9);
+  --_borderRadius: var(--borderRadius, 3px);
+}
+
+body {
+  font-family: var(--_fontFamily);
+  min-height: 100vh;
+  max-width: 80vh;
+  justify-self: center;
+  background: linear-gradient(to bottom, #72c6ef, #f5e6a8);
+  transition: background 0.6s ease;
+}
