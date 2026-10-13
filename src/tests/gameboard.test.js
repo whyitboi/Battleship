@@ -29,5 +29,6 @@ describe("Gameboard tests", () => {
     board.placeShip(ship, [2, 3], "vertical");
     expect(board.receiveAttack([2, 4])).toBe("hit");
     expect(board.receiveAttack([2, 5])).toBe("miss");
+    expect(board.missedShots.has([2, 5])).toBe(false);
   });
 });
