@@ -10,6 +10,6 @@ export class Ship {
     return (this.hits += 1);
   }
   isSunk() {
-    return this.length === this.hits ? true : false;
+    return this.hits >= this.length;
   }
 }
