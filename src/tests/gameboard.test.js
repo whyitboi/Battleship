@@ -41,6 +41,6 @@ describe("Gameboard tests", () => {
     const ship = new Ship(3);
     board.placeShip(ship, [2, 3], "vertical");
     board.receiveAttack([2, 4]);
-    expect(board.receiveAttack([2, 4])).toBe(undefined);
+    expect(board.receiveAttack([2, 4])).toBe();
   });
 });
