@@ -29,7 +29,11 @@ export class Gameboard {
     return [...this.missedShots.values()];
   }
   receiveAttack(position) {
-    if (this.hits.has(this.key(position))) return;
+    if (
+      this.hits.has(this.key(position)) ||
+      this.missedShots.has(this.key(position))
+    )
+      return;
     if (this.shipPositions.has(this.key(position))) {
       const ship = this.getShipAt(position);
       ship.hit();
@@ -39,5 +43,8 @@ export class Gameboard {
       this.missedShots.set(this.key(position), position);
       return "miss";
     }
+  }
+  allSunk() {
+    //if (this.hits.length === 0 && this.missedShots.length === 0) return "Here";
   }
 }
