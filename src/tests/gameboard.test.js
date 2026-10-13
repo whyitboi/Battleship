@@ -23,12 +23,17 @@ describe("Gameboard tests", () => {
     expect(board.getShipAt([2, 4])).toBe(ship);
     expect(board.getShipAt([2, 5])).toBe(ship);
   });
-  test("receiving an attack", () => {
+  test("hit() is called on a ship", () => {
     const board = new Gameboard();
     const ship = new Ship(2);
     board.placeShip(ship, [2, 3], "vertical");
     expect(board.receiveAttack([2, 4])).toBe("hit");
+  });
+  test("a miss is recorded", () => {
+    const board = new Gameboard();
+    const ship = new Ship(2);
+    board.placeShip(ship, [2, 3], "vertical");
     expect(board.receiveAttack([2, 5])).toBe("miss");
-    expect(board.missedShots.has([2, 5])).toBe(false);
+    expect(board.getMissedShots()).toContainEqual([2, 5]);
   });
 });
