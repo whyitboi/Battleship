@@ -1,40 +1,24 @@
 import { Ship } from "./ship";
 export class Gameboard {
-  constructor(capacity = 10) {
-    this.capacity = capacity;
-    this.buckets = Array.from({ length: this.capacity }, () => []);
+  constructor() {
+    this.shipPositions = new Map();
   }
-  hash(key) {
-    let hashCode = 0;
-    const seed = 31;
-    for (let i = 0; i < key.length; i++) {
-      hashCode = seed * hashCode + key.charCodeAt(i);
-      hashCode = hashCode % this.capacity;
-    }
+
+  key([x, y]) {
+    return `${x},${y}`;
   }
-  bucket(key) {
-    const index = this.hash(key);
-    if (index < 0 || index >= this.buckets.length) {
-      throw new Error("Trying to access out of bound index");
-    }
-    return this.buckets[index];
-  }
-  checkEntry(bucket, key) {
-    for (const entry of bucket) {
-      if (entry.key === key) {
-        return entry;
+
+  placeShip(ship, start, direction) {
+    if (direction.toLowerCase() === "vertical") {
+      for (let i = 0; i < ship.length; i++) {
+        this.shipPositions.set(this.key([start[0], start[1] + i]), ship);
       }
     }
-    return null;
-  }
-  placeShip(ship, start, direction) {
-    ship.length;
-    if (direction.toLowerCas() === "vertical") {
-      //Use bucket helper
-    }
-    if (direction.toLowerCas() === "horizontal") {
-      //I need to enter the bucket and find the particular entry
+    if (direction.toLowerCase() === "horizontal") {
+      this.shipPositions.set(this.key([start[0] + i, start[1]]), ship);
     }
   }
-  getShipAt(position) {}
+  getShipAt(position) {
+    return this.shipPositions.get(this.key(position));
+  }
 }
