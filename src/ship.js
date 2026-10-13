@@ -1,9 +1,15 @@
 export class Ship {
-  constructor(lenght = 1) {
+  constructor(length = 1) {
     this.length = length;
-    //create nodes of length
+    this.hits = 0;
   }
   length() {
     return this.length;
+  }
+  hit() {
+    return (this.hits += 1);
+  }
+  isSunk() {
+    return this.length === this.hits ? true : false;
   }
 }
