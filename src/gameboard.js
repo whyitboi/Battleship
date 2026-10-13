@@ -2,7 +2,8 @@ import { Ship } from "./ship";
 export class Gameboard {
   constructor() {
     this.shipPositions = new Map();
-    this.missedShots = new Set();
+    this.missedShots = new Map();
+    this.hits = new Set();
   }
 
   key([x, y]) {
@@ -25,16 +26,17 @@ export class Gameboard {
     return this.shipPositions.get(this.key(position));
   }
   getMissedShots() {
-    return this.missedShots;
+    return [...this.missedShots.values()];
   }
   receiveAttack(position) {
-    if (this.missedShots.has(this.key(position))) return undefined;
+    if (this.hits.has(this.key(position))) return undefined;
     if (this.shipPositions.has(this.key(position))) {
       const ship = this.getShipAt(position);
       ship.hit();
+      this.hits.add(this.key(position));
       return "hit";
     } else {
-      this.missedShots.add(this.key(position));
+      this.missedShots.set(this.key(position), position);
       return "miss";
     }
   }
