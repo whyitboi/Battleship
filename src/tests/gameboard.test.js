@@ -111,20 +111,23 @@ describe("Gameboard tests", () => {
         });
       });
 
-      test("ship overlap", () => {
-        const secondShip = new Ship(2);
-        board.placeShip(ship, [2, 3], "vertical");
-        expect(() => board.placeShip(secondShip, [2, 3], "horizontal")).toThrow(
-          "Position occupied",
-        );
-        expect(board.ships).toHaveLength(0);
+      describe("occupied or invalide direction", () => {
+        test("ship overlap", () => {
+          const secondShip = new Ship(2);
+          board.placeShip(ship, [2, 3], "vertical");
+          expect(() =>
+            board.placeShip(secondShip, [1, 4], "horizontal"),
+          ).toThrow("Position occupied");
+          expect(board.ships).toHaveLength(1);
+        });
+        test("direction not vertical or horizontal", () => {
+          expect(() => board.placeShip(ship, [2, 3], "horizo")).toThrow(
+            "Invalid direction",
+          );
+          expect(board.ships).toHaveLength(0);
+        });
       });
-      test("direction not vertical or horizontal", () => {
-        expect(() => board.placeShip(ship, [2, 3], "horizo")).toThrow(
-          "Invalid direction",
-        );
-        expect(board.ships).toHaveLength(0);
-      });
+
       test("valid placement", () => {
         expect(() => board.placeShip(ship, [7, 0], "vertical")).not.toThrow();
         expect(board.ships).toHaveLength(1);

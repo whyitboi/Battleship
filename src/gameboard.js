@@ -21,7 +21,7 @@ export class Gameboard {
     }
 
     const dx = dir === "horizontal" ? 1 : 0;
-    const dy = dir === "vertixal" ? 1 : 0;
+    const dy = dir === "vertical" ? 1 : 0;
     const endX = start[0] + dx * (ship.length - 1);
     const endY = start[1] + dy * (ship.length - 1);
 
@@ -35,11 +35,10 @@ export class Gameboard {
     }
 
     for (let i = 0; i < ship.length; i++) {
-      if (this.shipPositions.has(this.key(start))) {
-        clash = true; //throw new Error("Position occupied");
-      } else clash = false;
-
-      if (clash) throw new Error("Position occupied");
+      if (
+        this.shipPositions.has(this.key([start[0] + dx * i, start[1] + dy * i]))
+      )
+        throw new Error("Position occupied");
     }
   }
   //Methods
