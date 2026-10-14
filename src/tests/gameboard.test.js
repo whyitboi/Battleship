@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 describe("Gameboard tests", () => {
-  describe.skip("placeShip()", () => {
+  describe("placeShip()", () => {
     test("a horizontal ship occupies each square it covers", () => {
       board.placeShip(ship, [2, 3], "horizontal");
       expect(board.getShipAt([2, 3])).toBe(ship);
@@ -27,7 +27,7 @@ describe("Gameboard tests", () => {
       expect(board.ships).toHaveLength(1);
     });
   });
-  describe.skip("receiveAttack()", () => {
+  describe("receiveAttack()", () => {
     test("hit() is called on a ship", () => {
       const ship = new Ship(2);
       board.placeShip(ship, [2, 3], "vertical");
@@ -52,7 +52,7 @@ describe("Gameboard tests", () => {
       expect(board.getMissedShots()).toHaveLength(1);
     });
   });
-  describe.skip("allSunk()", () => {
+  describe("allSunk()", () => {
     test("no ships placed", () => {
       expect(board.allSunk()).toBe(true);
     });
@@ -111,8 +111,16 @@ describe("Gameboard tests", () => {
         });
       });
 
-      describe("occupied or invalide direction", () => {
-        test("ship overlap", () => {
+      describe("occupied or invalid direction", () => {
+        test("ship overlap: start square case", () => {
+          const secondShip = new Ship(3);
+          board.placeShip(ship, [2, 3], "vertical");
+          expect(() =>
+            board.placeShip(secondShip, [2, 3], "horizontal"),
+          ).toThrow("Position occupied");
+          expect(board.ships).toHaveLength(1);
+        });
+        test("ship overlap: crossing case", () => {
           const secondShip = new Ship(3);
           board.placeShip(ship, [2, 3], "vertical");
           expect(() =>

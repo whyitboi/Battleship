@@ -13,7 +13,6 @@ export class Gameboard {
     return `${x},${y}`;
   }
   canPlace(ship, start, direction) {
-    let clash = false;
     const dir = direction.toLowerCase();
 
     if (dir !== "horizontal" && dir !== "vertical") {
