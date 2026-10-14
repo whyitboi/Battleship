@@ -113,7 +113,7 @@ describe("Gameboard tests", () => {
 
       describe("occupied or invalide direction", () => {
         test("ship overlap", () => {
-          const secondShip = new Ship(2);
+          const secondShip = new Ship(3);
           board.placeShip(ship, [2, 3], "vertical");
           expect(() =>
             board.placeShip(secondShip, [1, 4], "horizontal"),
