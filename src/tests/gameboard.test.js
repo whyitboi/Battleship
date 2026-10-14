@@ -2,14 +2,17 @@ import { describe, expect, test } from "@jest/globals";
 import { Gameboard } from "../gameboard";
 import { Ship } from "../ship";
 
-const board = new Gameboard();
-const ship = new Ship(3);
+let board;
+let ship;
+
+beforeEach(() => {
+  board = Gameboard();
+  ship = Ship(3);
+});
 
 describe("Gameboard tests", () => {
   describe.skip("placeShip()", () => {
     test("a horizontal ship occupies each square it covers", () => {
-      //   const board = new Gameboard();
-      //   const ship = new Ship(3);
       board.placeShip(ship, [2, 3], "horizontal");
 
       expect(board.getShipAt([2, 3])).toBe(ship);
@@ -17,10 +20,7 @@ describe("Gameboard tests", () => {
       expect(board.getShipAt([4, 3])).toBe(ship);
     });
     test("a vertical ship occupies each square it covers", () => {
-      //   const board = new Gameboard();
-      //   const ship = new Ship(3);
       board.placeShip(ship, [2, 3], "vertical");
-
       expect(board.getShipAt([2, 3])).toBe(ship);
       expect(board.getShipAt([2, 4])).toBe(ship);
       expect(board.getShipAt([2, 5])).toBe(ship);
@@ -34,18 +34,22 @@ describe("Gameboard tests", () => {
       expect(board.receiveAttack([2, 4])).toBe("hit");
     });
     test("a miss is recorded", () => {
-      const board = new Gameboard();
       const ship = new Ship(2);
       board.placeShip(ship, [2, 3], "vertical");
       expect(board.receiveAttack([2, 5])).toBe("miss");
       expect(board.getMissedShots()).toContainEqual([2, 5]);
     });
     test("attacking the same square twice", () => {
-      //   const board = new Gameboard();
-      //   const ship = new Ship(3);
       board.placeShip(ship, [2, 3], "vertical");
       board.receiveAttack([2, 4]);
       expect(board.receiveAttack([2, 4])).toBe();
+    });
+    test("attacking an empty square twice", () => {
+      board.placeShip(ship, [2, 3], "vertical");
+      board.receiveAttack([5, 8]);
+      expect(board.receiveAttack([5, 8])).toBeUndefined();
+      expect(board.getMissedShots()).toContainEqual([5, 8]);
+      expect(board.getMissedShots()).toHaveLength(1);
     });
   });
   describe("allSunk()", () => {
