@@ -81,30 +81,58 @@ describe("Gameboard tests", () => {
   });
   describe("validate placements of ships on the gameboard", () => {
     describe("canPlace()", () => {
-      test("hanging off the board", () => {
-        expect(board.placeShip(ship, [-1, 2], "vertical")).toThrow(
-          "Out of bounds",
-        );
-        expect(board.placeShip(ship, [2, -1], "horizontal")).toThrow(
-          "Out of bounds",
-        );
-        expect(board.placeShip(ship, [8, 2], "vertical")).toThrow(
-          "Out of bounds",
-        );
-        expect(board.placeShip(ship, [2, 8], "horizontal")).toThrow(
-          "Out of bounds",
-        );
+      describe("vertical ship", () => {
+        test("hanging off the board x-axis", () => {
+          expect(() =>
+            board.placeShip(ship, [-1, 2], "vertical").toThrow("Out of bounds"),
+          );
+          expect(board.ships).toHaveLength(0);
+        });
+        test("hanging off the board y-axis", () => {
+          expect(() =>
+            board.placeShip(ship, [8, 2], "vertical").toThrow("Out of bounds"),
+          );
+          expect(board.ships).toHaveLength(0);
+        });
       });
+      describe("horizontal ship", () => {
+        test("hanging off the board x-axis", () => {
+          expect(() =>
+            board
+              .placeShip(ship, [2, -1], "horizontal")
+              .toThrow("Out of bounds"),
+          );
+          expect(board.ships).toHaveLength(0);
+        });
+
+        test("hanging off the board y-axis", () => {
+          expect(() =>
+            board
+              .placeShip(ship, [2, 8], "horizontal")
+              .toThrow("Out of bounds"),
+          );
+          expect(board.ships).toHaveLength(0);
+        });
+      });
+
       test("ship overlap", () => {
         board.placeShip(ship, [2, 3], "vertical");
-        expect(board.placeShip(ship, [2, 3], "horizontal")).toThrow(
-          "Position occupied",
+        expect(() =>
+          board
+            .placeShip(ship, [2, 3], "horizontal")
+            .toThrow("Position occupied"),
         );
+        expect(board.ships).toHaveLength(0);
       });
       test("direction not vertical or horizontal", () => {
-        expect(board.placeShip(ship, [2, 3], "horizo")).toThrow(
-          "Ivalid direction",
+        expect(() =>
+          board.placeShip(ship, [2, 3], "horizo").toThrow("Ivalid direction"),
         );
+        expect(board.ships).toHaveLength(0);
+      });
+      test("valid placement", () => {
+        expect(() => canPlace(ship, [7, 0], "vertical").not.toThrow());
+        expect(board.ships).toHaveLength(1);
       });
     });
   });

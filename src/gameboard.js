@@ -15,31 +15,43 @@ export class Gameboard {
   canPlace(ship, start, direction) {
     let clash = false;
     if (
-      direction.toLowerCase() !== "horizontal" ||
+      direction.toLowerCase() !== "horizontal" &&
       direction.toLowerCase() !== "vertical"
     ) {
       throw new Error("Ivalid direction");
-    } else if (direction.toLowerCase() === "horizontal") {
-      if (start[0] < 0 || start[0] + ship.length - 1 > 9) {
+    }
+    if (direction.toLowerCase() === "horizontal") {
+      if (
+        start[0] < 0 ||
+        start[0] + ship.length - 1 > 9 ||
+        start[1] < 0 ||
+        start[1] + ship.length - 1 > 9
+      ) {
         throw new Error("Out of bounds");
       }
-    } else if (direction.toLowerCase() === "vertical") {
-      if (start[1] < 0 || start[1] + ship.length - 1 > 9) {
+    }
+    if (direction.toLowerCase() === "vertical") {
+      if (
+        start[0] < 0 ||
+        start[0] + ship.length - 1 > 9 ||
+        start[1] < 0 ||
+        start[1] + ship.length - 1 > 9
+      ) {
         throw new Error("Out of bounds");
       }
-    } else {
-      for (let i = 0; i < ship.length; i++) {
-        if (this.shipPositions.has(this.key(start))) {
-          clash = true; //throw new Error("Position occupied");
-        } else clash = false;
-      }
+    }
+
+    for (let i = 0; i < ship.length; i++) {
+      if (this.shipPositions.has(this.key(start))) {
+        clash = true; //throw new Error("Position occupied");
+      } else clash = false;
+
       if (clash) throw new Error("Position occupied");
     }
-    return true;
   }
   //Methods
   placeShip(ship, start, direction) {
-    if (!this.canPlace(ship, start, direction)) return;
+    this.canPlace(ship, start, direction);
     if (direction.toLowerCase() === "vertical") {
       for (let i = 0; i < ship.length; i++) {
         this.shipPositions.set(this.key([start[0], start[1] + i]), ship);
