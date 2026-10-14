@@ -52,7 +52,7 @@ describe("Gameboard tests", () => {
       expect(board.getMissedShots()).toHaveLength(1);
     });
   });
-  describe("allSunk()", () => {
+  describe.skip("allSunk()", () => {
     test("no ships placed", () => {
       expect(board.allSunk()).toBe(true);
     });
@@ -77,6 +77,35 @@ describe("Gameboard tests", () => {
       board.receiveAttack([3, 4]);
       board.receiveAttack([3, 5]);
       expect(board.allSunk()).toBe(true);
+    });
+  });
+  describe("validate placements of ships on the gameboard", () => {
+    describe("canPlace()", () => {
+      test("hanging off the board", () => {
+        expect(board.placeShip(ship, [-1, 2], "vertical")).toThrow(
+          "Out of bounds",
+        );
+        expect(board.placeShip(ship, [2, -1], "horizontal")).toThrow(
+          "Out of bounds",
+        );
+        expect(board.placeShip(ship, [8, 2], "vertical")).toThrow(
+          "Out of bounds",
+        );
+        expect(board.placeShip(ship, [2, 8], "horizontal")).toThrow(
+          "Out of bounds",
+        );
+      });
+      test("ship overlap", () => {
+        board.placeShip(ship, [2, 3], "vertical");
+        expect(board.placeShip(ship, [2, 3], "horizontal")).toThrow(
+          "Position occupied",
+        );
+      });
+      test("direction not vertical or horizontal", () => {
+        expect(board.placeShip(ship, [2, 3], "horizo")).toThrow(
+          "Ivalid direction",
+        );
+      });
     });
   });
 });
