@@ -1,4 +1,4 @@
-import { describe, expect, test } from "@jest/globals";
+import { describe, expect, test, beforeEach } from "@jest/globals";
 import { Gameboard } from "../gameboard";
 import { Ship } from "../ship";
 
@@ -6,29 +6,29 @@ let board;
 let ship;
 
 beforeEach(() => {
-  board = Gameboard();
-  ship = Ship(3);
+  board = new Gameboard();
+  ship = new Ship(3);
 });
 
 describe("Gameboard tests", () => {
   describe.skip("placeShip()", () => {
     test("a horizontal ship occupies each square it covers", () => {
       board.placeShip(ship, [2, 3], "horizontal");
-
       expect(board.getShipAt([2, 3])).toBe(ship);
       expect(board.getShipAt([3, 3])).toBe(ship);
       expect(board.getShipAt([4, 3])).toBe(ship);
+      expect(board.ships).toHaveLength(1);
     });
     test("a vertical ship occupies each square it covers", () => {
       board.placeShip(ship, [2, 3], "vertical");
       expect(board.getShipAt([2, 3])).toBe(ship);
       expect(board.getShipAt([2, 4])).toBe(ship);
       expect(board.getShipAt([2, 5])).toBe(ship);
+      expect(board.ships).toHaveLength(1);
     });
   });
   describe.skip("receiveAttack()", () => {
     test("hit() is called on a ship", () => {
-      const board = new Gameboard();
       const ship = new Ship(2);
       board.placeShip(ship, [2, 3], "vertical");
       expect(board.receiveAttack([2, 4])).toBe("hit");
@@ -42,7 +42,7 @@ describe("Gameboard tests", () => {
     test("attacking the same square twice", () => {
       board.placeShip(ship, [2, 3], "vertical");
       board.receiveAttack([2, 4]);
-      expect(board.receiveAttack([2, 4])).toBe();
+      expect(board.receiveAttack([2, 4])).toBeUndefined();
     });
     test("attacking an empty square twice", () => {
       board.placeShip(ship, [2, 3], "vertical");

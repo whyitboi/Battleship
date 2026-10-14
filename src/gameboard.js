@@ -1,9 +1,11 @@
+import { setSeconds } from "date-fns";
 import { Ship } from "./ship";
 export class Gameboard {
   constructor() {
     this.shipPositions = new Map();
     this.missedShots = new Map();
     this.hits = new Set();
+    this.ships = [];
   }
 
   key([x, y]) {
@@ -21,6 +23,7 @@ export class Gameboard {
         this.shipPositions.set(this.key([start[0] + i, start[1]]), ship);
       }
     }
+    this.ships.push(ship);
   }
   getShipAt(position) {
     return this.shipPositions.get(this.key(position));
@@ -45,6 +48,6 @@ export class Gameboard {
     }
   }
   allSunk() {
-    //if (this.hits.length === 0 && this.missedShots.length === 0) return "Here";
+    return this.ships.every((ship) => ship.isSunk());
   }
 }
