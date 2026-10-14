@@ -1,5 +1,5 @@
 import { Gameboard } from "./gameboard";
-export class Player {
+class Player {
   constructor(name = "Player") {
     this.name = name;
     this.gameboard = new Gameboard();
@@ -8,7 +8,7 @@ export class Player {
     return enemy.gameboard.receiveAttack(position);
   }
 }
-export class ComputerPlayer extends Player {
+class ComputerPlayer extends Player {
   constructor() {
     super("Computron");
     this.notFired = null;
@@ -24,7 +24,8 @@ export class ComputerPlayer extends Player {
         }
       }
     }
-    if (this.notFired.length === 0) throw new Error("No suares left to attack");
+    if (this.notFired.length === 0)
+      throw new Error("No squares left to attack");
     const i = Math.floor(Math.random() * this.notFired.length);
     const [position] = this.notFired.splice(i, 1);
     return position;
@@ -33,3 +34,4 @@ export class ComputerPlayer extends Player {
     return super.attack(enemy, this.draw(enemy));
   }
 }
+export { Player, ComputerPlayer };

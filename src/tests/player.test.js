@@ -6,13 +6,11 @@ import { Ship } from "../ship";
 describe("Player Tests", () => {
   let player1;
   let player2;
-  let ship;
   let computron;
 
   beforeEach(() => {
     player1 = new Player("Anne");
     player2 = new Player("Bob");
-    ship = new Ship(3);
   });
   describe("Human Player", () => {
     test("has its own gameboard", () => {
@@ -20,6 +18,7 @@ describe("Player Tests", () => {
       expect(player1.gameboard).not.toBe(player2.gameboard);
     });
     test("attack() hits enemy's board not player's", () => {
+      const ship = new Ship(3);
       player2.gameboard.placeShip(ship, [2, 3], "vertical");
       expect(player1.attack(player2, [2, 4])).toBe("hit");
       expect(player1.gameboard.getMissedShots()).toHaveLength(0);
@@ -53,7 +52,7 @@ describe("Player Tests", () => {
     test("throws when all squares have been fired at", () => {
       for (let i = 0; i < 100; i++) computron.attack(player1);
       expect(() => computron.attack(player1)).toThrow(
-        "No suares left to attack",
+        "No squares left to attack",
       );
     });
   });
