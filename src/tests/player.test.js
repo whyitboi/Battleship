@@ -50,5 +50,11 @@ describe("Player Tests", () => {
       }
       expect(player1.gameboard.getMissedShots()).toHaveLength(100);
     });
+    test("throws when all squares have been fired at", () => {
+      for (let i = 0; i < 100; i++) computron.attack(player1);
+      expect(() => computron.attack(player1)).toThrow(
+        "No suares left to attack",
+      );
+    });
   });
 });

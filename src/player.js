@@ -22,17 +22,14 @@ export class ComputerPlayer extends Player {
         for (let y = 0; y < size; y++) {
           this.notFired.push([x, y]);
         }
-        if (this.notFired.length === o)
-          throw new Error("No suares left to attack");
       }
     }
-
-    const x = Math.floor(Math.random()) * enemy.gameboard.size;
-    const y = Math.floor(Math.random()) * enemy.gameboard.size;
-    //const enemnyBoard = [...this.enemyBoard];
-    const position = [x, y];
-
+    if (this.notFired.length === 0) throw new Error("No suares left to attack");
+    const i = Math.floor(Math.random() * this.notFired.length);
+    const [position] = this.notFired.splice(i, 1);
     return position;
   }
-  attack(enemy) {}
+  attack(enemy) {
+    return super.attack(enemy, this.draw(enemy));
+  }
 }
