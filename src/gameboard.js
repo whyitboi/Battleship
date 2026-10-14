@@ -14,31 +14,24 @@ export class Gameboard {
   }
   canPlace(ship, start, direction) {
     let clash = false;
+    const dir = direction.toLowerCase();
+
+    if (dir !== "horizontal" && dir !== "vertical") {
+      throw new Error("Invalid direction");
+    }
+
+    const dx = dir === "horizontal" ? 1 : 0;
+    const dy = dir === "vertixal" ? 1 : 0;
+    const endX = start[0] + dx * (ship.length - 1);
+    const endY = start[1] + dy * (ship.length - 1);
+
     if (
-      direction.toLowerCase() !== "horizontal" &&
-      direction.toLowerCase() !== "vertical"
+      start[0] < 0 ||
+      start[1] < 0 ||
+      endX >= this.size ||
+      endY >= this.size
     ) {
-      throw new Error("Ivalid direction");
-    }
-    if (direction.toLowerCase() === "horizontal") {
-      if (
-        start[0] < 0 ||
-        start[0] + ship.length - 1 > 9 ||
-        start[1] < 0 ||
-        start[1] + ship.length - 1 > 9
-      ) {
-        throw new Error("Out of bounds");
-      }
-    }
-    if (direction.toLowerCase() === "vertical") {
-      if (
-        start[0] < 0 ||
-        start[0] + ship.length - 1 > 9 ||
-        start[1] < 0 ||
-        start[1] + ship.length - 1 > 9
-      ) {
-        throw new Error("Out of bounds");
-      }
+      throw new Error("Out of bounds");
     }
 
     for (let i = 0; i < ship.length; i++) {
