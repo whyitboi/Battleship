@@ -5,7 +5,7 @@ export class Player {
     this.gameboard = new Gameboard();
   }
   attack(enemy, position) {
-    enemy.gameboard.receiveAttack(position);
+    return enemy.gameboard.receiveAttack(position);
   }
 }
 export class ComputerPlayer extends Player {

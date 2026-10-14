@@ -13,12 +13,12 @@ describe("Player Tests", () => {
     player2 = new Player("Bob");
     ship = new Ship(3);
   });
-  test("has its won gameboard", () => {
+  test("has its own gameboard", () => {
     expect(player1.gameboard).toBeInstanceOf(Gameboard);
     expect(player1.gameboard).not.toBe(player2.gameboard);
   });
   test("attack() hits enemy's board not player's", () => {
-    player2.gameboard.placeShips(ship, [2, 3], "vertical");
+    player2.gameboard.placeShip(ship, [2, 3], "vertical");
     expect(player1.attack(player2, [2, 4])).toBe("hit");
     expect(player1.gameboard.getMissedShots()).toHaveLength(0);
   });
