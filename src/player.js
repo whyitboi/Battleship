@@ -11,35 +11,28 @@ export class Player {
 export class ComputerPlayer extends Player {
   constructor() {
     super("Computron");
-    this.attacks = new Set();
-    this.enemyBoard = new Set();
+    this.notFired = null;
   }
   draw(enemy) {
-    //get all the possible squares
-    for (let x = 0; x < size; x++) {
-      for (let y = 0; y < size; y++) {
-        this.enemyBoard.add(enemy.gameboard.key([x, y]));
+    if (this.notFired === null) {
+      this.notFired = [];
+      const size = enemy.gameboard.size;
+      //get all the possible squares
+      for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+          this.notFired.push([x, y]);
+        }
+        if (this.notFired.length === o)
+          throw new Error("No suares left to attack");
       }
     }
 
     const x = Math.floor(Math.random()) * enemy.gameboard.size;
     const y = Math.floor(Math.random()) * enemy.gameboard.size;
-    const enemnyBoard = [...this.enemyBoard];
+    //const enemnyBoard = [...this.enemyBoard];
     const position = [x, y];
 
     return position;
   }
-  attack(enemy) {
-    const position = this.draw(enemy);
-    const size = enemy.gameboard.size;
-
-    if (this.attacks.has(position)) this.draw(enemy);
-
-    //get all the possible squares... I want to move this to the helper draw()
-    for (let x = 0; x < size; x++) {
-      for (let y = 0; y < size; y++) {
-        this.enemyBoard.add(enemy.gameboard.key([x, y]));
-      }
-    }
-  }
+  attack(enemy) {}
 }
