@@ -1,3 +1,4 @@
+import { Gameboard } from "./gameboard";
 import { Player, ComputerPlayer } from "./player";
 
 export class Game {
@@ -34,5 +35,9 @@ export class Game {
       } while (reply === "hit");
     }
     return fired;
+  }
+  randomizePlayerFleet() {
+    this.humanP1.gameboard = new Gameboard();
+    this.humanP1.gameboard.placeRandomFleet();
   }
 }

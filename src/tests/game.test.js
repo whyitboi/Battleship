@@ -15,6 +15,16 @@ describe("Game", () => {
     const newGame = new Game();
     expect(newGame.computer.gameboard.shipPositions.size).toBe(17);
   });
+  test("randomizePlayerFleet", () => {
+    const newGame = new Game();
+    game.randomizePlayerFleet();
+    expect(game.humanP1.gameboard.shipPositions.size).toBe(17);
+  });
+  test("random player fleet places ships once", () => {
+    game.randomizePlayerFleet();
+    game.randomizePlayerFleet();
+    expect(game.humanP1.gameboard.shipPositions.size).toBe(17);
+  });
 
   test("starts with a human, then a computer and no winner", () => {
     expect(game.humanP1).toBeInstanceOf(Player);
