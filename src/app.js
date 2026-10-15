@@ -20,4 +20,7 @@ export function app() {
     game.randomizePlayerFleet();
     render();
   });
+
+  game.randomizePlayerFleet();
+  render();
 }

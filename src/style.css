@@ -51,3 +51,9 @@ body {
   background: linear-gradient(to bottom, #72c6ef, #f5e6a8);
   transition: background 0.6s ease;
 }
+.gameboard {
+  border: solid 2px black;
+}
+button.cell {
+  padding: 15px;
+}
