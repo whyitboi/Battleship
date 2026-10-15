@@ -37,10 +37,10 @@ describe("Game", () => {
   });
   test("repeated miss returns undefined and records 1 miss", () => {
     game.playTurn([0, 0]);
-    expect(game.playTurn[(0, 0)]).toBeUndefined();
+    expect(game.playTurn([0, 0])).toBeUndefined();
     expect(game.humanP1.gameboard.getMissedShots()).toHaveLength(1);
   });
-  test("human sinkinking last ship sets winner", () => {
+  test("human sinking last ship sets winner", () => {
     game.computer.gameboard.placeShip(new Ship(1), [2, 3], "vertical");
     expect(game.playTurn([2, 3])).toBe("hit");
     expect(game.winner).toBe(game.humanP1.name);
@@ -48,6 +48,6 @@ describe("Game", () => {
   test("playTurn returns undefined if game is over", () => {
     game.computer.gameboard.placeShip(new Ship(1), [2, 3], "vertical");
     game.playTurn([2, 3]);
-    expect(game.playTurn([2, 3])).toBeUndefined();
+    expect(game.playTurn([9, 9])).toBeUndefined();
   });
 });
