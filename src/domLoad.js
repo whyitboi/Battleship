@@ -15,11 +15,12 @@ export function domLoad() {
   computerBoardHeader.textContent = "Computron";
   status.setAttribute("id", "status");
   randomShipsButton.textContent = "Randomize My Ships";
+  boardsWrapper.classList.add("boardWrapper");
   Object.assign(playerBoard, {
     id: "player-board",
     className: "gameboard",
   });
-  Object.assign(playerBoard, {
+  Object.assign(computerBoard, {
     id: "computer-board",
     className: "gameboard",
   });
@@ -28,8 +29,8 @@ export function domLoad() {
 
   boardsWrapper.append(
     playerBoardHeader,
-    playerBoard,
     computerBoardHeader,
+    playerBoard,
     computerBoard,
   );
   content.append(boardsWrapper, status, randomShipsButton);

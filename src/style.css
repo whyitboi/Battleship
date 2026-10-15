@@ -51,9 +51,17 @@ body {
   background: linear-gradient(to bottom, #72c6ef, #f5e6a8);
   transition: background 0.6s ease;
 }
+.boardWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .gameboard {
   border: solid 2px black;
+  display: grid;
+  grid-template-columns: repeat(10, 32px);
+  gap: 2px;
 }
 button.cell {
-  padding: 15px;
+  padding: 0;
+  aspect-ratio: 1;
 }
