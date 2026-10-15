@@ -28,6 +28,18 @@ export function domLoad() {
 export function renderBoard(gameboard, container, showShips) {
   //....
   container = container.replaceChildren();
+  for (let x = 0; x < gameboard.size; x++) {
+    for (let y = 0; y < gameboard.size; y++) {
+      let square = document.createElement("button");
+      Object.assign(square.dataset, { x: x, y: y });
+      if (gameboard.hits.has(gameboard.key([x, y])))
+        Object.assign(square, { className: "hit" });
+      if (gameboard.getMissedShots.has(gameboard.key([x, y])))
+        Object.assign(square, { className: "miss" });
+      if (showShips && gameboard.getShipAt([x, y]) !== undefined)
+        Object.assign(square, { className: "ship" });
+    }
+  }
 }
 export function setStatus(text) {
   //.....
