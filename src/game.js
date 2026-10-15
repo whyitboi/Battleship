@@ -4,8 +4,9 @@ export class Game {
   constructor(player2 = null) {
     this.humanP1 = new Player("player1");
     this.computer = new ComputerPlayer();
+    this.computer.gameboard.placeRandomFleet();
     this.winner = null;
-    if (player2 !== null) this.humanP2 = new Player(player2);
+    this.humanP2 = player2 !== null ? new Player(player2) : null;
   }
   //Helper
   isDefeated(player) {

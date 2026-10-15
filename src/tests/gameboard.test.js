@@ -145,8 +145,10 @@ describe("Gameboard tests", () => {
   describe("placeRandomFleet", () => {
     test("5 ships of length [5,4,3,3,2] placed on gameboard", () => {
       board.placeRandomFleet();
-      const lengths = board.ships.map((s) => s.length.sort((a, b) => b - a));
-      expect(lengths).toBe([5, 4, 3, 3, 2]);
+      const lengths = board.ships
+        .map((ship) => ship.length)
+        .sort((a, b) => b - a);
+      expect(lengths).toEqual([5, 4, 3, 3, 2]);
       expect(board.shipPositions.size).toBe(17);
     });
   });

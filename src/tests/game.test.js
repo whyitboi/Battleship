@@ -2,12 +2,18 @@ import { describe, expect, test, beforeEach } from "@jest/globals";
 import { Game } from "../game";
 import { Player, ComputerPlayer } from "../player";
 import { Ship } from "../ship";
+import { Gameboard } from "../gameboard";
 
 describe("Game", () => {
   let game;
 
   beforeEach(() => {
     game = new Game();
+    game.computer.gameboard = new Gameboard();
+  });
+  test("computer gets random fleet when new game is created", () => {
+    const newGame = new Game();
+    expect(newGame.computer.gameboard.shipPositions.size).toBe(17);
   });
 
   test("starts with a human, then a computer and no winner", () => {

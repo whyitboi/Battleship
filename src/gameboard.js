@@ -83,17 +83,16 @@ export class Gameboard {
   }
   placeRandomFleet() {
     const fleet = [5, 4, 3, 3, 2];
-    for (const ship of fleet) {
-      let x = Math.floor(Math.random() * this.size - 1);
-      let y = Math.floor(Math.random() * this.size - 1);
-      let i = Math.floor(Math.random() * 2) + 1;
-      dir = i === 1 ? "horizontal" : "vertical";
-      try {
-        this.placeShip(new Ship(ship), [x, y], dir);
-        break;
-      } catch (error) {
-        //I'm not sure this is the right way to handle this error
-        throw error;
+    for (const length of fleet) {
+      let placed = false;
+      while (!placed) {
+        const x = Math.floor(Math.random() * this.size);
+        const y = Math.floor(Math.random() * this.size);
+        const dir = Math.random() < 0.5 ? "horizontal" : "vertical";
+        try {
+          this.placeShip(new Ship(length), [x, y], dir);
+          placed = true;
+        } catch (error) {}
       }
     }
   }
