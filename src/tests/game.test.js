@@ -16,7 +16,6 @@ describe("Game", () => {
     expect(newGame.computer.gameboard.shipPositions.size).toBe(17);
   });
   test("randomizePlayerFleet", () => {
-    const newGame = new Game();
     game.randomizePlayerFleet();
     expect(game.humanP1.gameboard.shipPositions.size).toBe(17);
   });
