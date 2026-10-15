@@ -16,10 +16,10 @@ export function app() {
     const result = game.playTurn(position);
     render();
     if (game.winner !== null) setStatus(`The Winner is ${game.winner.name}`);
-    if (result === undefined)
+    else if (result === undefined)
       setStatus("Already Fired there. Pick another square");
-    if (result === "hit") setStatus("Hit! Fire Again");
-    if (result === "miss") setStatus(`Miss`);
+    else if (result === "hit") setStatus("Hit! Fire Again");
+    else setStatus(`Miss`);
   });
   onRandomize(() => {
     game.randomizePlayerFleet();
