@@ -15,16 +15,22 @@ export class Game {
   }
   playTurn(position) {
     if (this.winner !== null) return;
-    //human fires
+    //human fires first
     const fired = this.humanP1.attack(this.computer, position);
     if (fired === undefined) return;
     if (this.isDefeated(this.computer)) {
-      this.winner = this.humanP1;
+      this.winner = this.humanP1.name;
       return fired;
     }
     if (fired === "miss") {
-      this.computer.attack(this.humanP1);
-      if (fired === this.isDefeated(this.humanP1)) this.winner = this.computer;
+      let reply;
+      do {
+        reply = this.computer.attack(this.humanP1);
+        if (fired === this.isDefeated(this.humanP1)) {
+          this.winner = this.computer.name;
+          break;
+        }
+      } while (reply === "hit}");
     }
     return fired;
   }

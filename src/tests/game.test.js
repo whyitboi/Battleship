@@ -23,4 +23,11 @@ describe("Game", () => {
     game.computer.gameboard.placeShip(new Ship(3), [3, 3], "horizontal");
     expect(game.playTurn([3, 3])).toBe("hit");
   });
+  test("computer keeps firing while its a hit and can win", () => {
+    game.computer.gameboard.placeShip(new Ship(1), [5, 5], "horizontal");
+    for (let y = 0; y < 10; y++)
+      game.humanP1.gameboard.placeShip(new Ship(10), [0, y], "horizontal");
+    expect(game.playTurn([0, 0])).toBe("miss");
+    expect(game.winner).toBe(game.computer.name);
+  });
 });
