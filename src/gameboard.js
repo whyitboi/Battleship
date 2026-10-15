@@ -1,4 +1,4 @@
-import { Ship } from "./ship";
+import { Ship } from "./ship.js";
 export class Gameboard {
   constructor(size = 10) {
     this.shipPositions = new Map();
