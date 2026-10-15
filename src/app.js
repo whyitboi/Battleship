@@ -3,24 +3,21 @@ import { Game } from "./game.js";
 
 export function app() {
   let game = new Game();
-  const playerBoard = document.getElementById("playerBoard");
-  const computeBoard = document.getElementById("computerBoard");
+  const playerBoard = document.getElementById("player-board");
+  const computerBoard = document.getElementById("computer-board");
 
   function render() {
-    renderBoard(
-      game.humanP1.gameboard,
-      playerBoard,
-      game.humanP1.gameboard.shipPositions,
-    );
+    renderBoard(game.humanP1.gameboard, playerBoard, true);
+    renderBoard(game.computer.gameboard, computerBoard, false);
     //set status
   }
 
   onAttack((position) => {
     game.playTurn(position);
-    //render();
+    render();
   });
   onRandomize(() => {
     game.randomizePlayerFleet();
-    //render();
+    render();
   });
 }

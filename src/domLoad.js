@@ -27,7 +27,7 @@ export function domLoad() {
   content.append(boardsWrapper, status, randomShipsButton);
 }
 export function renderBoard(gameboard, container, showShips) {
-  //container.replaceChildren();
+  container.replaceChildren();
   for (let y = 0; y < gameboard.size; y++) {
     for (let x = 0; x < gameboard.size; x++) {
       let square = document.createElement("button");
