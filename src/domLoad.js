@@ -57,9 +57,15 @@ export function renderBoard(gameboard, container, showShips) {
 export function setStatus(text) {
   //.....
 }
-export function onAttack(callback) {
-  //...
+function onAttack(callback) {
+  document
+    .getElementById("computer-board")
+    .addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (button === null) return;
+      callback([Number(button.dataset.x), Number(button.dataset.y)]);
+    });
 }
-export function onRandomize(callback) {
-  //...
+function onRandomize(callback) {
+  document.getElementById("random-ships").addEventListener("click", callback);
 }
