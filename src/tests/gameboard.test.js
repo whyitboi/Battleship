@@ -142,4 +142,18 @@ describe("Gameboard tests", () => {
       });
     });
   });
+  describe("placeRandomFleet", () => {
+    test("5 ships of length [5,4,3,3,2] placed on gameboard", () => {
+      board.placeRandomFleet();
+
+      let sum = 0;
+      for (let x = 0; x < size; x++) {
+        for (let y = 0; y < size; y++) {
+          if (board.getShipAt([x, y]) === ship) sum++;
+        }
+      }
+      expect(board.ships).toHaveLength(5);
+      expect(sum).toBe(17);
+    });
+  });
 });

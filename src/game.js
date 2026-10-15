@@ -26,11 +26,11 @@ export class Game {
       let reply;
       do {
         reply = this.computer.attack(this.humanP1);
-        if (fired === this.isDefeated(this.humanP1)) {
+        if (this.isDefeated(this.humanP1)) {
           this.winner = this.computer.name;
           break;
         }
-      } while (reply === "hit}");
+      } while (reply === "hit");
     }
     return fired;
   }
