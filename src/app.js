@@ -13,8 +13,10 @@ export function app() {
   }
 
   onAttack((position) => {
-    game.playTurn(position);
+    const result = game.playTurn(position);
     render();
+    if (game.winner !== null && result === undefined)
+      setStatus(`The Winner is ${game.winner.name}`);
   });
   onRandomize(() => {
     game.randomizePlayerFleet();

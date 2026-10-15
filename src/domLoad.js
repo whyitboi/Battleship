@@ -55,9 +55,9 @@ export function renderBoard(gameboard, container, showShips) {
   }
 }
 export function setStatus(text) {
-  //.....
+  document.getElementById("status").textContent = text;
 }
-function onAttack(callback) {
+export function onAttack(callback) {
   document
     .getElementById("computer-board")
     .addEventListener("click", (event) => {
@@ -66,6 +66,6 @@ function onAttack(callback) {
       callback([Number(button.dataset.x), Number(button.dataset.y)]);
     });
 }
-function onRandomize(callback) {
+export function onRandomize(callback) {
   document.getElementById("random-ships").addEventListener("click", callback);
 }
