@@ -12,14 +12,21 @@ export function app() {
     //set status
   }
 
-  onAttack((position) => {
+  function onAttack(position) {
+    document
+      .getElementById("computer-board")
+      .addEventListener("click", (event) => {
+        if (event.target.closest("button") === null) return;
+        //what am I getting the dataet.x and .y of?
+      });
     game.playTurn(position);
     render();
-  });
-  onRandomize(() => {
+  }
+  function onRandomize(callback) {
+    document.getElementById("random-ships").addEventListener("click", callback);
     game.randomizePlayerFleet();
     render();
-  });
+  }
 
   game.randomizePlayerFleet();
   render();

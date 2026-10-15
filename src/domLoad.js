@@ -14,8 +14,11 @@ export function domLoad() {
   playerBoardHeader.textContent = "Player 1";
   computerBoardHeader.textContent = "Computron";
   status.setAttribute("id", "status");
-  randomShipsButton.textContent = "Randomize My Ships";
   boardsWrapper.classList.add("boardWrapper");
+  Object.assign(randomShipsButton, {
+    id: "random-ships",
+    textContent: "Randomize My Ships",
+  });
   Object.assign(playerBoard, {
     id: "player-board",
     className: "gameboard",
@@ -24,8 +27,6 @@ export function domLoad() {
     id: "computer-board",
     className: "gameboard",
   });
-  //   playerBoard.setAttribute("id", "player-board");
-  //   computerBoard.setAttribute("id", "computer-board");
 
   boardsWrapper.append(
     playerBoardHeader,

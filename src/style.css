@@ -21,6 +21,7 @@
   padding: 0;
   margin: 0;
   border: none;
+  /*border-collapse: collapse;*/
   box-sizing: border-box;
   --_fontFamily: var(--fontFamily, inherit);
   --_fontColor: var(--fontColor, inherit);
@@ -54,6 +55,7 @@ body {
 .boardWrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
 .gameboard {
   border: solid 2px black;
@@ -64,4 +66,13 @@ body {
 button.cell {
   padding: 0;
   aspect-ratio: 1;
+}
+.ship {
+  background-color: #f5e6a8;
+}
+.hit {
+  background-color: darkred;
+}
+.miss {
+  background-color: #d6d9d9;
 }
