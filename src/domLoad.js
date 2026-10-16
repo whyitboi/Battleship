@@ -9,6 +9,7 @@ export function domLoad() {
   const computerBoard = document.createElement("div");
   const status = document.createElement("p");
   const randomShipsButton = document.createElement("button");
+  const newGameButton = document.createElement("button");
 
   //Set attributes
   playerBoardHeader.textContent = "Player 1";
@@ -27,6 +28,11 @@ export function domLoad() {
     id: "computer-board",
     className: "gameboard",
   });
+  Object.assign(newGameButton, {
+    id: "new-game",
+    textContent: "New Game",
+    className: "new-game-button",
+  });
 
   boardsWrapper.append(
     playerBoardHeader,
@@ -34,7 +40,7 @@ export function domLoad() {
     playerBoard,
     computerBoard,
   );
-  content.append(boardsWrapper, status, randomShipsButton);
+  content.append(boardsWrapper, status, randomShipsButton, newGameButton);
 }
 export function renderBoard(gameboard, container, showShips) {
   container.replaceChildren();
@@ -68,4 +74,7 @@ export function onAttack(callback) {
 }
 export function onRandomize(callback) {
   document.getElementById("random-ships").addEventListener("click", callback);
+}
+export function onNewGame(callback) {
+  document.getElementById("new-game").addEventListener("click", callback);
 }

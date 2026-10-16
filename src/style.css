@@ -76,3 +76,8 @@ button.cell {
 .miss {
   background-color: #d6d9d9;
 }
+.game-over {
+  display: block;
+  pointer-events: none;
+  color: #ccc;
+}
