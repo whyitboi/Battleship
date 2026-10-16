@@ -13,8 +13,7 @@ export function app() {
   const computerBoard = document.getElementById("computer-board");
 
   function render() {
-    if (game.winner !== null)
-      computerBoard.classList.toggle("game-over", this.winner !== null);
+    computerBoard.classList.toggle("game-over", game.winner !== null);
     document.getElementById("random-ships").disabled = game.hasStarted();
     renderBoard(game.humanP1.gameboard, playerBoard, true);
     renderBoard(game.computer.gameboard, computerBoard, false);
