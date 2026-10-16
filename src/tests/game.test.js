@@ -65,4 +65,21 @@ describe("Game", () => {
     game.playTurn([2, 3]);
     expect(game.playTurn([9, 9])).toBeUndefined();
   });
+  describe("hasStarted", () => {
+    test("false on new game, true after", () => {
+      game.randomizePlayerFleet();
+      expect(game.hasStarted()).toBe(false);
+      game.playTurn([0, 0]);
+      expect(game.hasStarted()).toBe(true);
+    });
+    test("randomize after game start", () => {
+      game.randomizePlayerFleet();
+      const before = game.humanP1.gameboard;
+      game.playTurn([0, 0]);
+      expect(() => game.randomizePlayerFleet()).toThrow(
+        "Game has already started",
+      );
+      expect(game.humanP1.gameboard).toBe(before);
+    });
+  });
 });

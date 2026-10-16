@@ -15,6 +15,15 @@ export class Game {
       player.gameboard.shipPositions.size !== 0 && player.gameboard.allSunk()
     );
   }
+  hasStarted() {
+    const totalShots =
+      this.humanP1.gameboard.missedShots.size +
+      this.humanP1.gameboard.hits.size +
+      this.computer.gameboard.missedShots.size +
+      this.computer.gameboard.hits.size;
+    return totalShots > 0;
+  }
+  //Methods
   playTurn(position) {
     if (this.winner !== null) return;
     //human fires first
@@ -37,6 +46,7 @@ export class Game {
     return fired;
   }
   randomizePlayerFleet() {
+    if (this.hasStarted()) throw new Error("Game has already started");
     this.humanP1.gameboard = new Gameboard();
     this.humanP1.gameboard.placeRandomFleet();
   }

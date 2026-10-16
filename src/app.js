@@ -13,7 +13,9 @@ export function app() {
   const computerBoard = document.getElementById("computer-board");
 
   function render() {
-    if (game.winner !== null) computerBoard.className("game-over");
+    if (game.winner !== null)
+      computerBoard.classList.toggle("game-over", this.winner !== null);
+    document.getElementById("random-ships").disabled = game.hasStarted();
     renderBoard(game.humanP1.gameboard, playerBoard, true);
     renderBoard(game.computer.gameboard, computerBoard, false);
     //set status
@@ -32,9 +34,7 @@ export function app() {
   onNewGame(() => {
     game = new Game();
     game.randomizePlayerFleet();
-    document.getElementById("status").textContent =
-      "Your move: Pick a square to fire on Computon's fleet";
-    // setStatus("Your move: Pick a square to fire on Computon's fleet");
+    setStatus("Your move: Pick a square to fire on Computron's fleet");
     render();
   });
   onRandomize(() => {
@@ -44,5 +44,5 @@ export function app() {
 
   game.randomizePlayerFleet();
   render();
-  setStatus("Your move: Pick a square to fire on Computon's fleet");
+  setStatus("Your move: Pick a square to fire on Computron's fleet");
 }

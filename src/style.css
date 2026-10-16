@@ -77,7 +77,6 @@ button.cell {
   background-color: #d6d9d9;
 }
 .game-over {
-  display: block;
   pointer-events: none;
-  color: #ccc;
+  opacity: 0.6;
 }
