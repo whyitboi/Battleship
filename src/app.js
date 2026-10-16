@@ -17,7 +17,6 @@ export function app() {
     document.getElementById("random-ships").disabled = game.hasStarted();
     renderBoard(game.humanP1.gameboard, playerBoard, true);
     renderBoard(game.computer.gameboard, computerBoard, false);
-    //set status
   }
 
   onAttack((position) => {

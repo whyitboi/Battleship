@@ -74,9 +74,15 @@ button.cell {
   background-color: darkred;
 }
 .miss {
-  background-color: #d6d9d9;
+  background-color: #1596d7;
 }
 .game-over {
   pointer-events: none;
   opacity: 0.6;
+}
+#new-game,
+#random-ships {
+  border-radius: 8px;
+  margin: 10px;
+  padding: 10px;
 }
